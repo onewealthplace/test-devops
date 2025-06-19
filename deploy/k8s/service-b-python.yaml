@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b-python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b-python
+  template:
+    metadata:
+      labels:
+        app: service-b-python
+    spec:
+      containers:
+      - name: service-b-python
+        image: service-b-python
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        - name: SERVICE_A_GRPC_ADDR
+          value: "service-a-go:50051"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b-python
+spec:
+  selector:
+    app: service-b-python
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: http

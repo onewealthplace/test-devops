@@ -1,0 +1,25 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: devops-test
+build:
+  artifacts:
+    - image: service-a-go
+      context: services/service-a-go
+      docker:
+        dockerfile: Dockerfile
+    - image: service-b-python
+      context: services/service-b-python
+      docker:
+        dockerfile: Dockerfile
+    - image: frontend-node
+      context: services/frontend-node
+      docker:
+        dockerfile: Dockerfile
+  local:
+    push: false  # use local Docker daemon
+manifests:
+  rawYaml:
+    - deploy/k8s/service-a-go.yaml
+    - deploy/k8s/service-b-python.yaml
+    - deploy/k8s/frontend-node.yaml

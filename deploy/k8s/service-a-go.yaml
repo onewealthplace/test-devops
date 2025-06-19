@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a-go
+  template:
+    metadata:
+      labels:
+        app: service-a-go
+    spec:
+      containers:
+      - name: service-a-go
+        image: service-a-go
+        ports:
+        - containerPort: 8081
+          name: http
+        - containerPort: 50051
+          name: grpc
+        env:
+        - name: PORT
+          value: "8081"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a-go
+spec:
+  selector:
+    app: service-a-go
+  ports:
+  - port: 8081
+    targetPort: http
+    name: http
+  - port: 50051
+    targetPort: grpc
+    name: grpc
