@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package service_a;
 
-option go_package = "github.com/example/test-devops/proto/service_a;serviceapb";
+option go_package = "github.com/onewealthplace/test-devops/proto/service_a;serviceapb";
 
 // PingRequest is an empty message for pinging.
 message PingRequest {}

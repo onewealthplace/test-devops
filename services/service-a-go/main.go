@@ -11,6 +11,7 @@ import (
 	"time"
 
 	serviceapb "github.com/onewealthplace/test-devops/proto/service_a"
+
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"

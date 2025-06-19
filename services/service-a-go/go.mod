@@ -2,6 +2,8 @@ module service-a
 
 go 1.24.3
 
+replace github.com/onewealthplace/test-devops => ../..
+
 require (
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.61.0
 	go.opentelemetry.io/otel v1.36.0
