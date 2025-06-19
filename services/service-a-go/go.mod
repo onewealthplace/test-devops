@@ -11,6 +11,8 @@ require (
 	go.opentelemetry.io/otel/trace v1.36.0
 )
 
+require github.com/onewealthplace/test-devops/proto/service_a v0.0.0-20250619120934-8c6fe4d8ac49 // indirect
+
 require (
 	github.com/cenkalti/backoff/v5 v5.0.2 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
