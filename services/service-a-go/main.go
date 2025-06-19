@@ -104,8 +104,7 @@ func startGRPCServer(ctx context.Context, port string) error {
 		return fmt.Errorf("failed to listen: %w", err)
 	}
 	srv := grpc.NewServer(
-		grpc.UnaryInterceptor(otelgrpc.UnaryServerInterceptor()),
-		grpc.StreamInterceptor(otelgrpc.StreamServerInterceptor()),
+		grpc.StatsHandler(otelgrpc.NewServerHandler()),
 	)
 	serviceapb.RegisterServiceAServer(srv, &serviceAServer{})
 

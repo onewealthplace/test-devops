@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: proto/service_a.proto
+// source: proto/service_a/service_a.proto
 
 package serviceapb
 
@@ -121,5 +121,5 @@ var ServiceA_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/service_a.proto",
+	Metadata: "proto/service_a/service_a.proto",
 }
