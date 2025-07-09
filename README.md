@@ -57,7 +57,7 @@ Maximum duration: 1h
 
 4. Run the load test
    ```bash
-   ./generate_request.sh 100
+   bash generate_request.sh 100
    ```
 
 ## 📝 Guidelines
