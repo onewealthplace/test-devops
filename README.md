@@ -55,6 +55,11 @@ Maximum duration: 1h
    - username: `admin`
    - password: `devops@airfund2025`
 
+4. Run the load test
+   ```bash
+   ./generate_request.sh 100
+   ```
+
 ## 📝 Guidelines
 
 - [ ] Do not modify the code of the services
