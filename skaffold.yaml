@@ -1,0 +1,36 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: devops-test
+build:
+  artifacts:
+    - image: api-service
+      context: apps/api-service
+      docker:
+        dockerfile: Dockerfile
+    - image: worker-service
+      context: apps/worker-service
+      docker:
+        dockerfile: Dockerfile
+  local:
+    push: false  # use local Docker daemon
+manifests:
+  rawYaml:
+    - deploy/k8s/namespace.yaml
+    - deploy/k8s/*.yaml
+portForward:
+- resourceType: deployment
+  resourceName: api-service
+  namespace: default
+  port: 8080
+  localPort: 8080
+- resourceType: deployment
+  resourceName: worker-service
+  namespace: default
+  port: 5000
+  localPort: 8081
+- resourceType: deployment
+  resourceName: grafana
+  namespace: monitoring
+  port: 3000
+  localPort: 8082

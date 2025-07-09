@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: api-service
+    spec:
+      containers:
+        - name: api-service
+          image: api-service
+          ports:
+            - containerPort: 8080
+          env:
+            - name: WORKER_URL
+              value: "http://worker-service.default.svc.cluster.local:5000"
+          resources:
+            requests:
+              memory: "20Mi"
+              cpu: "10m"
+            limits:
+              memory: "50Mi"
+              cpu: "20m"
