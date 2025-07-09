@@ -25,8 +25,8 @@ for ((i=1; i<=NB_REQUESTS; i++)); do
     success_count=$((success_count+1))
   else
     echo "Error on request $i (status $status)"
-    sleep $((i/10))
   fi
+  sleep 1
 done
 
 success_rate=$(awk "BEGIN {printf \"%.2f\", (${success_count}/$NB_REQUESTS)*100}")

@@ -1,6 +1,7 @@
 from flask import Flask, Response
 from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 import time
+import logging
 
 app = Flask(__name__)
 
@@ -12,10 +13,16 @@ requests_total = Counter('worker_requests_total', 'Total number of /do-work requ
 
 @app.route('/do-work', methods=['POST'])
 def do_work():
-    print("Processing /do-work request...")
+    app.logger.info("Processing /do-work request...")
     requests_total.inc()
     leak.append('XXXX' * 10**6)
-    return f"Work done!"
+    return f'Work done!', 200
+
+@app.route('/clear', methods=['POST'])
+def clear_leak():
+    app.logger.info("Clearing leak...")
+    leak.clear()
+    return f'Leak cleared!', 200
 
 @app.route('/metrics')
 def metrics():
@@ -32,7 +39,9 @@ def all_required_services_are_running():
     return True
 
 if __name__ == '__main__':
-    print("Lauching startup process...")
-    time.sleep(10)
-    print("Startup complete. Starting Flask app.")
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
